@@ -10,7 +10,7 @@ const Input = ({onChange,onSubmit,value}) => {
 				className="form-group">
 				<label
 					htmlFor="listInput">
-					Email address
+					Add a new thing to do!
 				</label>
 				<input 
 					value={value}
@@ -18,7 +18,7 @@ const Input = ({onChange,onSubmit,value}) => {
 					type="text"
 					className="form-control"
 					id="listItemInput"
-					placeholder="add new todo"
+					placeholder="What's next, my lord?"
 				/>
 				<button 
 					className="btn btn-primary"

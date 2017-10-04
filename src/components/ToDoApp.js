@@ -6,45 +6,30 @@ import Input from './Input'
 
 
  class ToDoApp extends React.Component {
- 	componentWillMount(){
-	 	this.setState({
-	 		list:[{item:'thing1', done:false}],
-	 		newToDo: ''
-	 	})
- 	};
+ 	// componentWillMount(){
+	 // 	this.setState({
+	 // 		list:[{item:'thing1', done:false}],
+	 // 		newToDo: ''
+	 // 	})
+ 	// };
 
  	onInputChange = (event) =>{
-	 	this.setState({ newToDo: event.target.value});
+ 		this.props.inputChange(event.target.value);
 	 	// console.log(this.state.newToDo)
 	};
 
 	onInputSubmit = (event) => {
 		event.preventDefault();
-		this.setState((previousState)=>({
-			list: [...previousState.list, {item: previousState.newToDo, done: false }], // notice the change here
-			// list: previousState.list.push(previousState.newToDo)
-			newToDo: ''
-		}));
+		this.props.inputSubmit();
 	};
 
 	onListItemClick = (i)=>{
-		this.setState((previousState)=>({
-			list:[
-				...previousState.list.slice(0,i),
-				Object.assign({}, previousState.list[i], {done: !previousState.list[i].done}),
-				...previousState.list.slice(i+1)
-			]
-		}));
+		this.props.clickItem(i);
 
 	}
 
 	deleteListItem = (i)=>{
-		this.setState((previousState)=>({
-			list:[
-				...previousState.list.slice(0,i),
-				...previousState.list.slice(i+1)
-			]
-		}));
+		this.props.deleteItem(i);
 	}
 
 
@@ -59,16 +44,16 @@ import Input from './Input'
 					<div className="col-md-10 col-md-offset-1">
 				 		<div className="panel panel-default">
 					   		<div className="panel-body">
-					     		<h1>My To Do App</h1>
+					     		<h1>Bowen's Simple ToDo App</h1>
 					     		<hr/>
 					     		<List 
-						     		listItems={this.state.list} 
+						     		listItems={this.props.toDoApp.list} 
 						     		onClick={this.onListItemClick}
 						     		deleteItem={this.deleteListItem}
 						     		/>
 					     		<Input 
-					     			value={this.state.newToDo} 
-					     			onChange={this.onInputChange} 
+					     			value={this.props.toDoApp.newToDo} 
+					     			onChange={this.onInputChange}
 					     			onSubmit={this.onInputSubmit}
 					     		/>
 					   		</div>
