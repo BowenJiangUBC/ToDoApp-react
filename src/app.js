@@ -1,31 +1,17 @@
-// var React = require('react');
-// var ReactDOM = require('react-dom');
-//import ToDoApp from './components/ToDoApp';
-// var ToDoApp = require('../src/component/ToDoApp')
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import ToDoAppContainer from './containers/ToDoAppContainer';
-import configureStore from './redux/configureStore';
+import ToDoApp from "./components/ToDoApp";
 
-const store = configureStore();
 
 class App extends React.Component {
-  render(){
-    return(
-      <Provider store={store}>
-        <ToDoAppContainer />
-      </Provider>
-    );
-  }
+	render(){
+		return(
+			<div>
+				<ToDoApp />
+			</div>
+			);
+	}
 }
 
+
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
-
-
-// 热替换HMR，需要加入这段代码才会进行生效
-// if(module.hot){
-//     module.hot.accept();}
