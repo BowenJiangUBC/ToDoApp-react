@@ -6,7 +6,9 @@ class ToDoApp extends React.Component{
 
     componentWillMount(){
         this.setState({
-            list: ["thing1","thing2","thing3"],
+            list: [{item:"Eat", done:true},
+                {item:"Pray",done:true},
+                {item:"Love",done:false}],
             newToDo: "test"
         })
     };
@@ -19,15 +21,32 @@ class ToDoApp extends React.Component{
     };
 
 
-    onInputSubmit = () =>{
+    onInputSubmit = (event) =>{
         event.preventDefault();
-        this.setState((previousState)=>(
+        this.setState((prevState)=>(
             {
-                list:[...previousState.list,previousState.newToDo],
+                list: [...prevState.list,{item:prevState.newToDo,done:false}],
                 newToDo: "Add stuff"
             }
-        ));
-        console.log("suceed!")
+
+        ))
+    };
+
+    deleteItem = (i) =>{
+        this.setState((prevState)=>({
+            list:[
+                ...prevState.list.slice(0,i),
+                ...prevState.list.slice(i+1)
+            ]
+        }))
+    };
+
+    onItemClick = (i) =>{
+        this.setState((prevState)=>({
+            list: [...prevState.list.slice(0,i),
+                    Object.assign({},prevState.list[i],{done:!prevState.list[i].done}),
+                    ...prevState.list.slice(i+1)]
+        }))
     };
 
 
@@ -43,7 +62,9 @@ class ToDoApp extends React.Component{
                             <h1>Ugh....What should I do now?</h1>
                             <hr/>
                             <List
-                                listItem={this.state.list}/>
+                                listItem={this.state.list}
+                                deleteItem={this.deleteItem}
+                                itemClick={this.onItemClick}/>
 
                             <Input
                                 value={this.state.newToDo}

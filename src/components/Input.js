@@ -4,7 +4,8 @@ const Input = ({value, onChange, onSubmit}) => {
 
     return(
         <form
-            onSubmit={onSubmit}>
+            onSubmit={onSubmit}
+            >
             <div
                 className="form-group">
                 <label
@@ -12,14 +13,16 @@ const Input = ({value, onChange, onSubmit}) => {
                     Email address
                 </label>
                 <input
+                    placeholder={value}
+                    onChange={onChange}
                     type="text"
                     className="form-control"
                     id="listItemInput"
-                    placeholder={value}
-                    onChange={onChange}
+
 
                 />
                 <button
+
                     className="btn btn-primary">
                     Add Item
                 </button>
